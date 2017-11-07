@@ -1,4 +1,2 @@
 *.o
 *.pyc
-lib/*
-bin/*
