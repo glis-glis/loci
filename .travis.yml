@@ -3,7 +3,7 @@ compiler: gcc
 python:   "2.7"
 
 install:
-    - pip install --only-binary=numpy,scipy numpy scipy
+    - sudo pip install --only-binary=numpy,scipy numpy scipy
 
 before_script:
     - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/lib
