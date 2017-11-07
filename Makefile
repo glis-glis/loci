@@ -24,7 +24,7 @@ vpath %.c  $(SRC):$(TEST)
 vpath %.h  $(INCL):$(TEST):$(SRC)
 
 shlib :	$(OBJ)
-		$(CC) $(LFLAGS) -shared $(OBJ) -o lib/libloci.so
+		$(CC) $(LFLAGS) -shared $(OBJ) $(LIBS) -o lib/libloci.so
 
 test :	tfiles
 		$(BIN)/runtests
@@ -33,7 +33,7 @@ pytest : shlib
 		python $(PYTEST)/runtests.py
 
 tfiles : $(OBJ) $(TOBJ)
-		$(CC) $(TFLAGS) $(LIBS) $(OBJ) $(TOBJ) -o $(BIN)/runtests
+		$(CC) $(TFLAGS) $(OBJ) $(TOBJ) $(LIBS) -o $(BIN)/runtests
 
 runtests.o :	runtests.c runtests.h 
 		$(CC) $(CFLAGS) $(LIBS) -c $<
