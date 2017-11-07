@@ -43,7 +43,7 @@ Clone a copy of loci to your local computer and make the shared library:
     make    
 
 The shared library will be in `lib/libloci.so`, the header-files in `include/`,
-the python module in `python\loci`. 
+the python module in `python/loci`. 
 
 Testing
 ========
@@ -54,9 +54,10 @@ To test the statically linked test-files, type
     
     make test
 
-To test the dynaically linked python-test-files, type
+To test the dynamically linked python-test-files, type
 
 .. code:: bash
+
     make pytest
 
 Examples
