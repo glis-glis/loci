@@ -7,9 +7,14 @@ loci
 
 loci is a shared library for interpolations in up to 4 dimensions. In order to
 calculate the coefficients of the cubic polynom, only local values are used:
-The data itself and its first-order derivatives. This is in contrast to
-splines, where the coefficients are not calculated using derivatives, but
-non-local data, which can leed to over-smoothing the result.
+The data itself and all combinations of first-order derivatives, i.e. in 2D
+f_x, f_y and f_xy. This is in contrast to splines, where the coefficients are
+not calculated using derivatives, but non-local data, which can lead to
+over-smoothing the result.
+
+The scheme has been developed at the University of Geneva. It is based on
+Lekien & Marsden 2005, with improvements by Daniel Pfenniger and implemented by
+Andreas Füglistaler.
 
 .. |travis-ci| image:: https://api.travis-ci.org/AFueglistaler/loci.svg?branch=master
     :target: https://travis-ci.org/AFueglistaler/loci
@@ -58,6 +63,8 @@ To test the dynamically linked python-test-files, type
 
 .. code:: bash
 
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/lib
+    export PYTHONPATH=$PYTHONPATH:$(pwd)/python
     make pytest
 
 Examples
@@ -79,7 +86,8 @@ In order to use loci in Python, you first need to set the `LD_LIBRARY_PATH` and
     export PYTHONPATH=$PYTHONPATH:path_to_loci/python
 
 The following code shows the basic usage of the library in two dimensions. The
-usage in other dimensions is identical.
+usage in other dimensions is identical. You can also see the same example as a
+`Jupyter notebook <python/notebooks/Introduction%2BExample.ipynb>`_.
 
 .. code:: python
 
