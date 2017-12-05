@@ -86,8 +86,7 @@ In order to use loci in Python, you first need to set the `LD_LIBRARY_PATH` and
     export PYTHONPATH=$PYTHONPATH:path_to_loci/python
 
 The following code shows the basic usage of the library in two dimensions. The
-usage in other dimensions is identical. You can also see the same example as a
-`Jupyter notebook <python/notebooks/Introduction%2BExample.ipynb>`_.
+usage in other dimensions is identical. 
 
 .. code:: python
 
@@ -135,3 +134,11 @@ usage in other dimensions is identical. You can also see the same example as a
     ip.map_y(xs, ys)
     # Map 2nd-order x and 3rd-order y derivative on points 
     ip.map_diff(2, 3, xs, ys)
+
+Jupyter Notebooks
+=================
+
+There are two jupyter notebooks showing the usage of loci:
+
+* `Introduction + Example <python/notebooks/Introduction%2BExample.ipynb>`_
+* `Solid H2 Mass Fraction in the ISM <Solid%20H2%20Mass%20Fraction%20in%20the%20ISM.ipynb>`_
