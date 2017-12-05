@@ -141,4 +141,4 @@ Jupyter Notebooks
 There are two jupyter notebooks showing the usage of loci:
 
 * `Introduction + Example <python/notebooks/Introduction%2BExample.ipynb>`_
-* `Solid H2 Mass Fraction in the ISM <Solid%20H2%20Mass%20Fraction%20in%20the%20ISM.ipynb>`_
+* `Solid H2 Mass Fraction in the ISM <python/notebooks/Solid%20H2%20Mass%20Fraction%20in%20the%20ISM.ipynb>`_
