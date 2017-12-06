@@ -120,19 +120,27 @@ real diff2D_y(const Interpolation* ip, real x, real y)    {
 }
 
 real diff2D(const Interpolation* ip, int edx, int edy, real x, real y)    {
-    int i, j;
-    real xp, yp;
-
-    xp_i(&xp, &i, x, ip->x0s[0], ip->dxs[0]);
-    xp_i(&yp, &j, y, ip->x0s[1], ip->dxs[1]);
-
-    if(i>= 0 && i < ip->lens[0] && j>= 0 && j < ip->lens[1])   {
-        int ij  = NKS*(i*ip->lens[1] + j);
-        return poly(&ip->ks[ij], edx, edy, xp, yp)/ipow(ip->dxs[0], edx)/
-                   ipow(ip->dxs[1], edy);
+    if(edx > 3 || edy > 3)  {
+        return 0.;
     }
-    else    {
+    else if(edx < 0 || edy < 0)  {
         return NAN;
+    }
+    else {
+        int i, j;
+        real xp, yp;
+
+        xp_i(&xp, &i, x, ip->x0s[0], ip->dxs[0]);
+        xp_i(&yp, &j, y, ip->x0s[1], ip->dxs[1]);
+
+        if(i>= 0 && i < ip->lens[0] && j>= 0 && j < ip->lens[1])   {
+            int ij  = NKS*(i*ip->lens[1] + j);
+            return poly(&ip->ks[ij], edx, edy, xp, yp)/ipow(ip->dxs[0], edx)/
+                       ipow(ip->dxs[1], edy);
+        }
+        else    {
+            return NAN;
+        }
     }
 }
 

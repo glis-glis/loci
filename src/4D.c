@@ -254,24 +254,32 @@ real diff4D_w(const Interpolation* ip, real x, real y, real z, real w) {
 
 real diff4D(const Interpolation* ip, int edx, int edy, int edz, int edw, 
               real x, real y, real z, real w)    {
-    int i, j, k, l;
-    real xp, yp, zp, wp;
-
-    xp_i(&xp, &i, x, ip->x0s[0], ip->dxs[0]);
-    xp_i(&yp, &j, y, ip->x0s[1], ip->dxs[1]);
-    xp_i(&zp, &k, z, ip->x0s[2], ip->dxs[2]);
-    xp_i(&wp, &l, w, ip->x0s[3], ip->dxs[3]);
-
-    if(i>= 0 && i < ip->lens[0] && j>= 0 && j < ip->lens[1] && 
-        k>= 0 && k < ip->lens[2] && l>= 0 && l < ip->lens[3])   {
-        int ijkl  = NKS*(i*ip->lens[1]*ip->lens[2]*ip->lens[3] + 
-                    j*ip->lens[2]*ip->lens[3] + k*ip->lens[3] + l);
-        return poly(&ip->ks[ijkl], edx, edy, edz, edw, xp, yp, zp, wp)/
-            ipow(ip->dxs[0], edx)/ipow(ip->dxs[1], edy)/
-            ipow(ip->dxs[2], edz)/ipow(ip->dxs[3], edw);
+    if(edx > 3 || edy > 3 || edz > 3 || edw > 3)  {
+        return 0.;
     }
-    else    {
+    else if(edx < 0 || edy < 0 || edz < 0 || edw < 0)  {
         return NAN;
+    }
+    else {
+        int i, j, k, l;
+        real xp, yp, zp, wp;
+
+        xp_i(&xp, &i, x, ip->x0s[0], ip->dxs[0]);
+        xp_i(&yp, &j, y, ip->x0s[1], ip->dxs[1]);
+        xp_i(&zp, &k, z, ip->x0s[2], ip->dxs[2]);
+        xp_i(&wp, &l, w, ip->x0s[3], ip->dxs[3]);
+
+        if(i>= 0 && i < ip->lens[0] && j>= 0 && j < ip->lens[1] && 
+            k>= 0 && k < ip->lens[2] && l>= 0 && l < ip->lens[3])   {
+            int ijkl  = NKS*(i*ip->lens[1]*ip->lens[2]*ip->lens[3] + 
+                        j*ip->lens[2]*ip->lens[3] + k*ip->lens[3] + l);
+            return poly(&ip->ks[ijkl], edx, edy, edz, edw, xp, yp, zp, wp)/
+                ipow(ip->dxs[0], edx)/ipow(ip->dxs[1], edy)/
+                ipow(ip->dxs[2], edz)/ipow(ip->dxs[3], edw);
+        }
+        else    {
+            return NAN;
+        }
     }
 }
 

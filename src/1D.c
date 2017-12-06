@@ -78,16 +78,24 @@ real diff1D_x(const Interpolation* ip, real x)    {
 }
 
 real diff1D(const Interpolation* ip, int edx, real x)    {
-    int i;
-    real xp;
-
-    xp_i(&xp, &i, x, ip->x0s[0], ip->dxs[0]);
-
-    if(i>= 0 && i < ip->lens[0])   {
-        return poly(&ip->ks[NKS*i], edx, xp)/ipow(ip->dxs[0], edx);
+    if(edx > 3)  {
+        return 0.;
     }
-    else    {
+    else if(edx < 0)  {
         return NAN;
+    }
+    else {
+        int i;
+        real xp;
+
+        xp_i(&xp, &i, x, ip->x0s[0], ip->dxs[0]);
+
+        if(i>= 0 && i < ip->lens[0])   {
+            return poly(&ip->ks[NKS*i], edx, xp)/ipow(ip->dxs[0], edx);
+        }
+        else    {
+            return NAN;
+        }
     }
 }
 

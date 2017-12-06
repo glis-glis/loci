@@ -176,21 +176,30 @@ real diff3D_z(const Interpolation* ip, real x, real y, real z) {
 
 real diff3D(const Interpolation* ip, int edx, int edy, int edz, 
               real x, real y, real z)    {
-    int i, j, k;
-    real xp, yp, zp;
-
-    xp_i(&xp, &i, x, ip->x0s[0], ip->dxs[0]);
-    xp_i(&yp, &j, y, ip->x0s[1], ip->dxs[1]);
-    xp_i(&zp, &k, z, ip->x0s[2], ip->dxs[2]);
-
-    if(i>= 0 && i < ip->lens[0] && j>= 0 && j < ip->lens[1] && 
-        k>= 0 && k < ip->lens[2])   {
-        int ijk = NKS*(i*ip->lens[1]*ip->lens[2] + j*ip->lens[2] + k);
-        return poly(&ip->ks[ijk], edx, edy, edz, xp, yp, zp)/
-            ipow(ip->dxs[0], edx)/ipow(ip->dxs[1], edy)/ipow(ip->dxs[2], edz);
+    if(edx > 3 || edy > 3 || edz > 3)  {
+        return 0.;
     }
-    else    {
+    else if(edx < 0 || edy < 0 || edz < 0)  {
         return NAN;
+    }
+    else {
+        int i, j, k;
+        real xp, yp, zp;
+
+        xp_i(&xp, &i, x, ip->x0s[0], ip->dxs[0]);
+        xp_i(&yp, &j, y, ip->x0s[1], ip->dxs[1]);
+        xp_i(&zp, &k, z, ip->x0s[2], ip->dxs[2]);
+
+        if(i>= 0 && i < ip->lens[0] && j>= 0 && j < ip->lens[1] && 
+            k>= 0 && k < ip->lens[2])   {
+            int ijk = NKS*(i*ip->lens[1]*ip->lens[2] + j*ip->lens[2] + k);
+            return poly(&ip->ks[ijk], edx, edy, edz, xp, yp, zp)/
+                ipow(ip->dxs[0], edx)/ipow(ip->dxs[1], edy)/ipow(ip->dxs[2], 
+                     edz);
+        }
+        else    {
+            return NAN;
+        }
     }
 }
 
