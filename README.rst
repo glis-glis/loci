@@ -16,8 +16,8 @@ The scheme has been developed at the University of Geneva. It is based on
 Lekien & Marsden 2005, with improvements by Daniel Pfenniger and implemented by
 Andreas Füglistaler in C, Python and Julia.
 
-.. |travis-ci| image:: https://api.travis-ci.org/AFueglistaler/loci.svg?branch=master
-    :target: https://travis-ci.org/AFueglistaler/loci
+.. |travis-ci| image:: https://api.travis-ci.com/glis-glis/loci.svg?branch=master
+    :target: https://travis-ci.com/github/glis-glis/loci
 
 Developement
 ============
